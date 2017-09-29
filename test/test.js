@@ -32,6 +32,7 @@ describe("Twitter api call", function() {
             
             expect(error).to.be.a('null'); 
             done(); 
+            // $
         });
     }); 
     
