@@ -2,14 +2,14 @@ var btoa = require('btoa');
 var https = require('https'); 
 
 
+
 var keys = {
     client: process.env.TWITTER_CLIENT_ID , 
     secret: process.env.TWITTER_SECRET_KEY
 }
 
-
-
 var combined = keys.client + ":" + keys.secret; 
+
 var base64encoded = btoa(combined); 
 
 
@@ -41,10 +41,17 @@ function getAccessToken(handleAccessTokenResponse) {
             // console.log("########################################"); 
             console.log("status code: " + this.statusCode); 
             //console.log("Complete response: " + completeResponse); 
-            var responseJSON = JSON.parse(completeResponse); 
-            var accessToken = responseJSON.access_token; 
+            var error = null; 
+            var accessToken = null; 
             
-            handleAccessTokenResponse(accessToken); 
+            if (this.statusCode == "200") {
+                var responseJSON = JSON.parse(completeResponse); 
+                accessToken = responseJSON.access_token; 
+            } else {
+                error = completeResponse; 
+            }
+            
+            handleAccessTokenResponse(error, accessToken); 
             
             
             /*execute callback*/
@@ -88,6 +95,7 @@ function getTweets(accessToken, sendResponseToBrowser) {
             // console.log("########################################"); 
              console.log("status code: " + this.statusCode); 
             //console.log("Complete response: " + completeResponse); 
+<<<<<<< HEAD
             var error = null; 
             var tweetsList; 
             
@@ -103,6 +111,20 @@ function getTweets(accessToken, sendResponseToBrowser) {
             
             
             sendResponseToBrowser(error, tweetsList); 
+=======
+            var tweetsList = null; 
+            var error = null; 
+            
+            if (this.statusCode == "200") {
+                var responseJSON = JSON.parse(completeResponse); 
+                var tweetsList = responseJSON.statuses;
+            } else {
+                error = completeResponse; 
+            }
+            
+            sendResponseToBrowser(error, tweetsList);
+            
+>>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
       }); 
     });
     
@@ -113,7 +135,21 @@ function getTweets(accessToken, sendResponseToBrowser) {
 
 
 function doAllTwitterRequests(callback) {
+<<<<<<< HEAD
     getAccessToken(function(accessToken) {
+=======
+    console.log("In doAllTwitterRequests......"); 
+    
+    console.log("combined keys: " + combined); 
+    getAccessToken(function(error, accessToken) {
+        
+        if (error) {
+            console.log("error: " + error); 
+            callback(error, null); 
+            return; 
+        }
+        
+>>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
         getTweets(accessToken, function(error, tweets) {
             callback(error, tweets); 
         }); 

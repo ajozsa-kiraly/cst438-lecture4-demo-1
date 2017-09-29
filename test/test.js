@@ -32,7 +32,10 @@ describe("Twitter api call", function() {
             
             expect(error).to.be.a('null'); 
             done(); 
-            // $
+<<<<<<< HEAD
+            
+=======
+>>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
         });
     }); 
     

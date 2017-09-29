@@ -16,7 +16,15 @@
     "jade": "~1.11.0",
     "mocha": "^3.5.3",
     "morgan": "~1.8.1",
+<<<<<<< HEAD
     "serve-favicon": "~2.4.2",
+=======
+    "npmlog": "^4.1.2",
+    "process-nextick-args": "^1.0.7",
+    "request": "^2.82.0",
+    "serve-favicon": "~2.4.2",
+    "should": "^13.1.0",
+>>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
     "sinon": "^4.0.0"
   }
 }
