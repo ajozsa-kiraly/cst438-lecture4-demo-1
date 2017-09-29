@@ -1,9 +1,10 @@
-var async = require('async'); 
 var express = require('express');
 var router = express.Router();
 var https = require('https'); 
-var twitter = require('./helpers/twitter'); 
 
+
+console.log("In getty!!!!!!!!!!!!"); 
+console.log("api key: " + (process.env.GETTY_API_KEY || 'a2nx44jnc2tatmpvdk4b2zgg')); 
 
 const options = {
     hostname: "api.gettyimages.com", 
@@ -15,7 +16,7 @@ const options = {
     }
 }; 
 
-function makeGettyApiRequest(sendBackResponseToBrowser) {
+function makeApiRequest(sendBackResponseToBrowser) {
     var apiResponse = ''; 
     
     https.get(options, function(response){
@@ -48,26 +49,16 @@ function makeGettyApiRequest(sendBackResponseToBrowser) {
 
 
 
-router.get('/', function(req, res, next) {
-    async.parallel([
-        twitter.doAllTwitterRequests,
-        makeGettyApiRequest
-    ],
-    // optional callback
-    function(err, results) {
-        // results is an array
-        // first element is going to be 'tweets'
-        // second element is going to be 'imageURI'
-        
-        var tweets = results[0]; 
-        var imageURI = results[1]; 
-        
-        console.log("num tweets!!!!: " + tweets.length);
-        console.log("image URI!!!: " + imageURI); 
-        res.render('twitterAndGetty', {tweets: tweets, imageURI: imageURI});
-    });
-  
-});
+/* GET home page. */
+// router.get('/', function(req, res, next) {
+//   //res.render('index', { title: 'Express', className: 'CST438' });
+//   makeApiRequest(function(imageURI){
+//       res.render('getty', {imageURI: imageURI});
+//   }); 
+   
+// });
 
-module.exports = router;
+//module.exports = router;
+
+module.exports.makeApiRequest = makeApiRequest; 
 
