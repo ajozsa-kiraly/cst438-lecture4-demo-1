@@ -44,6 +44,15 @@ describe("Twitter api call", function() {
         });
     });
     
+    it("should check that tweets is an array that is not empty", function(done) {
+        twitter.doAllTwitterRequests(function(error, tweets) {
+            //console.log("tweets: " + tweets.length); 
+            //expect(tweets).to.be.a('array'); 
+            expect(tweets).to.be.an('array').that.is.not.empty; 
+            done(); 
+        });
+    });
+    
 }); 
 
 var stub = sinon.stub(getty, "makeApiRequest").callsFake(function(callback) {
