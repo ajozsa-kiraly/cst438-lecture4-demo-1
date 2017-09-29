@@ -1,6 +1,7 @@
-var btoa = require('btoa');
+var express = require('express');
+var router = express.Router();
 var https = require('https'); 
-
+var btoa = require('btoa');
 
 
 var keys = {
@@ -39,7 +40,7 @@ function getAccessToken(handleAccessTokenResponse) {
       
       res.on('end', function() {
             // console.log("########################################"); 
-            console.log("status code: " + this.statusCode); 
+            // console.log("status code: " + this.statusCode); 
             //console.log("Complete response: " + completeResponse); 
             var error = null; 
             var accessToken = null; 
@@ -64,8 +65,6 @@ function getAccessToken(handleAccessTokenResponse) {
     postReq.end();
     
 }
-
-
 
 //curl -H 'Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAOn%2F2AAAAAAA%2FK5ajiMUX%2B3UZ7R5yULG3sWQIIk%3D4TWghebaY5OI9jvdNIlMs12IEPPfHG16eo4MCJ2iCMZZDk9iCX' 
 //https://api.twitter.com/1.1/search/tweets.json?q=birds
@@ -93,25 +92,8 @@ function getTweets(accessToken, sendResponseToBrowser) {
       
       twitterResponse.on('end', function() {
             // console.log("########################################"); 
-             console.log("status code: " + this.statusCode); 
+            // console.log("status code: " + this.statusCode); 
             //console.log("Complete response: " + completeResponse); 
-<<<<<<< HEAD
-            var error = null; 
-            var tweetsList; 
-            
-            
-            if (this.statusCode != 200) {
-                // error
-                error = completeResponse
-            } else {
-                //success
-                var responseJSON = JSON.parse(completeResponse); 
-                tweetsList = responseJSON.statuses; 
-            }
-            
-            
-            sendResponseToBrowser(error, tweetsList); 
-=======
             var tweetsList = null; 
             var error = null; 
             
@@ -124,7 +106,6 @@ function getTweets(accessToken, sendResponseToBrowser) {
             
             sendResponseToBrowser(error, tweetsList);
             
->>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
       }); 
     });
     
@@ -135,9 +116,6 @@ function getTweets(accessToken, sendResponseToBrowser) {
 
 
 function doAllTwitterRequests(callback) {
-<<<<<<< HEAD
-    getAccessToken(function(accessToken) {
-=======
     console.log("In doAllTwitterRequests......"); 
     
     console.log("combined keys: " + combined); 
@@ -149,11 +127,10 @@ function doAllTwitterRequests(callback) {
             return; 
         }
         
->>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
         getTweets(accessToken, function(error, tweets) {
             callback(error, tweets); 
         }); 
     }); 
 }
 
-module.exports.doAllTwitterRequests = doAllTwitterRequests; 
+module.exports.doAllTwitterRequests = doAllTwitterRequests;

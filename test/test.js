@@ -32,10 +32,6 @@ describe("Twitter api call", function() {
             
             expect(error).to.be.a('null'); 
             done(); 
-<<<<<<< HEAD
-            
-=======
->>>>>>> c2a490152229b53cc378bb0d2ceda9895aa599e5
         });
     }); 
     
@@ -47,6 +43,7 @@ describe("Twitter api call", function() {
             done(); 
         });
     });
+    
 }); 
 
 var stub = sinon.stub(getty, "makeApiRequest").callsFake(function(callback) {
@@ -55,11 +52,11 @@ var stub = sinon.stub(getty, "makeApiRequest").callsFake(function(callback) {
     
 describe("Getty api call", function() {
     
-    it("should return without errors", function(done) {
+    it("should return without errors!", function(done) {
         
         getty.makeApiRequest(function(error, imgURI) {
             //console.log("tweets: " + tweets.length); 
-            console.log("imageURI: " + imgURI); 
+            console.log("imageURI!: " + imgURI); 
             
             expect(imgURI).to.not.be.a('null'); 
             done(); 
